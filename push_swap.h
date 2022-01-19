@@ -42,5 +42,6 @@ void st_swap(t_list *node);
 void	st_push(t_list **src, t_list **dst);
 void st_rotate(t_list **node);
 void st_rev_rotate(t_list **node);
+int st_ordered(t_list *head);
 
 #endif

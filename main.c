@@ -13,36 +13,6 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-static void	ft_check(int ac, char **av)
-{
-	int	i;
-	int	j;
-	long num;
-
-	i = 1;
-	if (ac <= 2)
-			exit (0);
-	while (i < ac)
-	{
-		num = ft_atoi(av[i]);
-		if (num == 2147483648 || num == -2147483648)
-		{
-			write(2, "Error", 5);
-			exit (0);
-		}
-		j =  i + 1;
-		while (j < ac)
-		{
-			if (num == ft_atoi(av[j]))
-			{
-				write(2, "Error", 5);
-				exit (0);
-			}
-			j++;
-		}
-		i++;
-	}
-}
 
 int main(int  ac, char **av)
 {
@@ -50,17 +20,18 @@ int main(int  ac, char **av)
 	t_list	*a;
 	t_list	*b;
 
-	ft_check(ac, av);
+
 	i = 0;
 	a = ft_get_num(ac , av);
 	b = NULL;
-	
+	printf("[%d]\n", st_ordered(a));
 	printf("\n");
 	//st_swap(a);
 	// st_push(&a, &b);
 	// st_push(&a, &b);
 	
 	//st_rev_rotate(&a);
+	
     while (a || b)
     {
         if (a)

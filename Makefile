@@ -20,6 +20,7 @@ SRCS =	main.c \
 		ft_lstmap.c \
 		ft_lstnew.c \
 		ft_lstsize.c \
+		st_order.c \
 
 OBJS = $(SRCS:.c=.o)
 

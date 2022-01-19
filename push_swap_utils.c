@@ -12,6 +12,37 @@
 
 #include "push_swap.h"
 
+void	ft_check(int ac, char **av)
+{
+	int	i;
+	int	j;
+	long num;
+
+	i = 1;
+	if (ac < 2)
+			exit (0);
+	while (i < ac)
+	{
+		num = ft_atoi(av[i]);
+		if (num == 2147483648 || num == -2147483648)
+		{
+			write(2, "Error", 5);
+			exit (0);
+		}
+		j =  i + 1;
+		while (j < ac)
+		{
+			if (num == ft_atoi(av[j]))
+			{
+				write(2, "Error", 5);
+				exit (0);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 t_list *ft_get_num(int ac , char **av)
 {
 	int		i;
@@ -19,6 +50,7 @@ t_list *ft_get_num(int ac , char **av)
 
 	i = 1;
 	p = NULL;
+	ft_check(ac , av);
 	t_list	*buffer;
 
 	while (i < ac)
@@ -29,7 +61,7 @@ t_list *ft_get_num(int ac , char **av)
 			free(buffer);
 			return (NULL);
 		}
-		ft_lstadd_front(&p, buffer);
+		ft_lstadd_back(&p, buffer);
 		i++;
 	}
 	return (p);
