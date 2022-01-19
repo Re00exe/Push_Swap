@@ -2,14 +2,13 @@ NAME = push_swap
 
 CFLAG = -Wall -Wextra -Werror
 
-RM = rm -f	
+RM = rm -rf	
 
 AR = ar
 ARFLAGS = crs
 
 
 SRCS =	main.c \
-		push_swap.c \
 		push_swap_utils.c \
 		ft_atoi.c \
 		ft_isdigit.c \
@@ -22,21 +21,23 @@ SRCS =	main.c \
 		ft_lstnew.c \
 		ft_lstsize.c \
 
+OBJS = $(SRCS:.c=.o)
+
+
 all : $(NAME)
 
-$(OBJS) : $(SRCS:.c=.o)
-
 $(NAME) : $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o : %c
-	gcc $(CFLAG) -c $< -o $@
+	$(CC) $(CFLAG) -c $< -o $@
 
 clean :
-	$(RM) $(OBJS) $(OBJS_BONUS)
+	$(RM) $(OBJS)
 
 fclean : clean
 	$(RM) $(NAME)
 
 re : fclean all
 
-.PHONY : clean fclean re
+.PHONY : all clean fclean re
