@@ -24,7 +24,7 @@ int main(int  ac, char **av)
 	i = 0;
 	a = ft_get_num(ac , av);
 	b = NULL;
-	printf("[%d]\n", st_ordered(a));
+	//printf("[%d]\n", st_ordered(a));
 	printf("\n");
 	//st_swap(a);
 	// st_push(&a, &b);
