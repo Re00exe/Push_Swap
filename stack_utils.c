@@ -33,6 +33,6 @@ void    st_trans(t_list **stack)
     while (i++ < len)
         ft_lstadd_back(&tmp, ft_lstnew(num));
     i = 0;
-    num =
+    num = 
 
 }
