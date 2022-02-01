@@ -38,7 +38,7 @@ $(NAME) : do_libft $(OBJS)
 
 do_libft:
 	@if [! -d "libft"]; then \
-		git clone https://github.com/Re00exe/libft.git; \
+		git clone  ; \
 	fi
 	@make all -C libft/ 
 
