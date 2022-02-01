@@ -1,45 +1,65 @@
-NAME = push_swap
 
-CFLAG = -Wall -Wextra -Werror
+#Color:
 
-RM = rm -rf	
+GREEN	= \033[0;32m
+DEFAULT	= \033[0;39m
+PINK	= \033[1;35m
+BLUE	= \033[1;34m
 
-AR = ar
-ARFLAGS = crs
+#Make_file
 
+NAME	= push_swap
+LIBFT	= libft/libft.a
+CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror
+RM		= rm -rf	
+PRINTF 	= printf
 
 SRCS =	main.c \
+		sorting_fcts.c \
 		push_swap_utils.c \
-		ft_atoi.c \
-		ft_isdigit.c \
-		ft_lstadd_back.c \
-		ft_lstadd_front.c \
-		ft_lstclear.c \
-		ft_lstiter.c \
-		ft_lstlast.c \
-		ft_lstmap.c \
-		ft_lstnew.c \
-		ft_lstsize.c \
-		stack.c \
-		stack_utils.c \
+		lst_options.c \
+		ssorting.c \
+		stack_utils.c 
 
 OBJS = $(SRCS:.c=.o)
 
+#Compiling Stage:
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+$(NAME) : do_libft $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $@
+	@$(PRINTF) "\r%100s\r$(GREEN)$(NAME) is up to date!$(DEFAULT)\n"
 
-%.o : %c
-	$(CC) $(CFLAG) -c $< -o $@
+%.o : %.c
+	@$(CC) $(CFLAG) -c $< -o $@
+	@$(PRINTF) "\rCompiling $(BLUE)$<$(DEFAULT)..."
 
-clean :
-	$(RM) $(OBJS)
+do_libft:
+	@if [! -d "libft"]; then \
+		git clone https://github.com/Re00exe/libft.git; \
+	fi
+	@make all -C libft/ 
 
-fclean : clean
-	$(RM) $(NAME)
+clean:
+	@$(PRINTF) "$(PINK)Cleaning $(NAME) ... $(DEFAULT)\n"
+	@if [ -d "libft" ]; then \
+		make clean -C libft; \
+	fi
+	@$(RM) $(OBJS)
 
-re : fclean all
+fclean: clean
+	@$(RM) $(NAME)
+	@if [ -d "libft" ]; then \
+		$(RM) $(LIBFT); \
+	fi 
+	@$(PRINTF) "$(PINK) $(NAME) removed successfully. $(DEFAULT)\n"
+	@if [ -d "libft" ]; then \
+		$(PRINTF) "$(PINK) $(LIBFT) removed successfully. $(DEFAULT)\n"; \
+	fi 
 
-.PHONY : all clean fclean re
+re : fclean 
+	@make all
+
+.PHONY : all do_libft clean fclean re

@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-long	ft_atoi(char *str)
+long	ft_up_atoi(char *str)
 {
 	int				i;
 	unsigned long	nb;
@@ -38,4 +38,80 @@ long	ft_atoi(char *str)
 		return (2147483648);
 	else
 		return (nb * sign);
+}
+
+int	st_to_lift(t_list **stack, void*content, char c)
+{
+	size_t	index;
+	void	*tmp;
+
+	tmp = malloc(sizeof(int));
+	if (!tmp)
+		return (0);
+	ft_memcpy(tmp, content, sizeof(int));
+	index = lst_find(*stack, content);
+	if (*(int *)stack[0]->content != *(int *)tmp && index != -1)
+	{
+		while (ft_memcmp(tmp, stack[0]->content, sizeof(int)))
+		{
+			if (index > (ft_lstsize(*stack) - 1) / 2)
+				st_rev_rotate_ab(stack, c);
+			else
+				st_rev_rotate_ab(stack, c);
+		}
+	}
+	free(tmp);
+	return (0);
+}
+
+void	*st_pop_out(t_list **stack)
+{
+	void	*node;
+	t_list	*head;
+
+	head = NULL;
+	if (!stack || !stack[0])
+		return (NULL);
+	head = *stack;
+	if (head->next)
+	{
+		*stack = head->next;
+		node = head->content;
+		free(head);
+		return (node);
+	}
+	node = head->content;
+	free(head);
+	*stack = NULL;
+	return (node);
+}
+
+int	st_new_push(t_list **stack, void *new)
+{
+	t_list	*node;
+
+	node = st_newnode(new);
+	if (!node)
+		return (0);
+	ft_lstadd_front(stack, node);
+	return (1);
+}
+
+void	st_clear(t_list **stack)
+{
+	t_list	*tmp;
+
+	tmp = NULL;
+	if (*stack)
+	{
+		while (*stack)
+		{
+			tmp = *stack;
+			stack[0] = stack[0]->next;
+			free(tmp->content);
+			free(tmp);
+			tmp = NULL;
+		}
+	}
+	*stack = NULL;
 }

@@ -13,50 +13,90 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+static void	ft_error(int a)
+{
+	write(2, "Error\n", 6);
+	exit (0);
+}
 
-int main(int  ac, char **av)
+static void	ft_check(int ac, char **av)
 {
 	int		i;
+	int		j;
+	long	num;
+
+	i = 1;
+	if (ac < 2)
+		exit (0);
+	while (i < ac)
+	{
+		num = ft_up_atoi(av[i]);
+		if (num == 2147483648 || num == -2147483648)
+			ft_error(1);
+		j = i + 1;
+		while (j < ac)
+		{
+			if (num == ft_atoi(av[j]))
+				ft_error(1);
+			j++;
+		}
+		i++;
+	}
+}
+
+static t_list	*ft_get_num(int ac, char **av)
+{
+	int		i;
+	t_list	*p;
+	long	num;
+
+	i = 1;
+	p = NULL;
+	ft_check(ac, av);
+	while (i < ac)
+	{
+		num = ft_atoi(av[i]);
+		ft_lstadd_back(&p, st_newnode((void *)&num));
+			i++;
+	}
+	return (p);
+}
+
+int	main(int ac, char **av)
+{
 	t_list	*a;
 	t_list	*b;
+	int		i;
 
-
-	i = 0;
-	a = ft_get_num(ac , av);
+	i = 3;
+	a = ft_get_num(ac, av);
 	b = NULL;
-	//printf("[%d]\n", st_ordered(a));
+	st_putitright(&a, &b);
+	st_clear(&a);
+	st_clear(&b);
+}
+/*	printf("[%d]\n", st_isready(a));
+	//st_trans(&a);
 	printf("\n");
-	//st_swap(a);
-	// st_push(&a, &b);
-	// st_push(&a, &b);
-	
-	//st_rev_rotate(&a);
-	
+	//st_swap_ab(&a ,'a');
+	//st_push_ab(&a, &b, 'b');
+	//st_rotate_ab(&a, 'a');
+
     while (a || b)
     {
         if (a)
         {
-            printf("%d", a->content);
+            printf("%d", *(int *)a->content);
             a = a->next;
         }
         printf("	|	");
         if (b)
         {
-            printf("%d", b->content);
+            printf("%d", *(int *)b->content);
             b = b->next;
         }
         printf("\n");
-    }
+   }
     printf("-\t\t-\na\t\tb\n");
-	// while (a)
-	// {
-	// 	printf("a = %d\n", a->content);
-	// 	a = a->next;
-	// }
-	// printf("----------\n");
-	// while (b)
-	// {
-	// 	printf("b = %d\n", b->content);
-	// 	b = b->next;
-	// }
 }
+*/

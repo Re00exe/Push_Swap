@@ -12,105 +12,90 @@
 
 #include "push_swap.h"
 
-void	ft_check(int ac, char **av)
-{
-	int	i;
-	int	j;
-	long num;
-
-	i = 1;
-	if (ac < 2)
-			exit (0);
-	while (i < ac)
-	{
-		num = ft_atoi(av[i]);
-		if (num == 2147483648 || num == -2147483648)
-		{
-			write(2, "Error", 5);
-			exit (0);
-		}
-		j =  i + 1;
-		while (j < ac)
-		{
-			if (num == ft_atoi(av[j]))
-			{
-				write(2, "Error", 5);
-				exit (0);
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-t_list *ft_get_num(int ac , char **av)
-{
-	int		i;
-	t_list 	*p;
-
-	i = 1;
-	p = NULL;
-	ft_check(ac , av);
-	t_list	*buffer;
-
-	while (i < ac)
-	{
-		buffer = ft_lstnew(ft_atoi(av[i]));
-		if (!buffer)
-		{
-			free(buffer);
-			return (NULL);
-		}
-		ft_lstadd_back(&p, buffer);
-		i++;
-	}
-	return (p);
-}
-
-void st_swap(t_list *node) //ss && sa && sb
-{
-	t_list	*dep;
-	int		swp;
-	
-	dep = node;
-	dep = dep->next;
-	swp = node->content;
-	node->content = dep->content;
-	dep->content = swp;
-}
-
-void	st_push(t_list **src, t_list **dst) // pa && pb && 
-{
-	t_list *node;
-
-	if (!(*src))
-		return ;
-	node = *src;
-	(*src) = (*src)->next;
-	ft_lstadd_front(dst, node);
-}
-
-void st_rotate(t_list **head) // Ra && Rb
+int	st_swap_ab(t_list **head, char c)
 {
 	t_list	*node;
+	void	*swp;
 
-	if (!(*head))
-		return ;
 	node = *head;
-	*head = (*head)->next;
-	ft_lstadd_back(head, node);
+	if (ft_lstsize(*head) > 1)
+	{
+		swp = node->content;
+		node->content = node->next->content;
+		node->next->content = swp;
+		if (c == 'a')
+			write(1, "sa\n", 3);
+		if (c == 'b')
+			write(1, "sb\n", 3);
+		return (1);
+	}
+	return (0);
 }
 
-void st_rev_rotate(t_list **node) // rra && rrb && rrr
+int	st_push_ab(t_list **src, t_list **dst, char c)
 {
+	void	*node;
+
+	if (ft_lstsize(*dst))
+	{
+		node = st_pop_out(dst);
+		st_new_push(src, node);
+		free(node);
+		if (c == 'a')
+			write(1, "pa\n", 3);
+		if (c == 'b')
+			write(1, "pb\n", 3);
+		return (1);
+	}
+	return (0);
+}
+
+int	st_rotate_ab(t_list **head, char c)
+{
+	void	*node;
+
+	if (ft_lstsize(*head) > 1)
+	{
+			node = st_pop_out(head);
+		ft_lstadd_back(head, ft_lstnew(node));
+		if (c == 'a')
+			write(1, "ra\n", 3);
+		if (c == 'b')
+			write(1, "rb\n", 3);
+		return (1);
+	}
+	return (0);
+}
+
+int	st_rev_rotate_ab(t_list **node, char c)
+{
+	void	*content;
 	t_list	*tmp;
 	t_list	*end;
 
-	tmp = ft_lstlast(*node);
-	end = *node;
-	while (end->next->next)
-		end = end->next;
-	end->next = NULL;
-	ft_lstadd_front(node, tmp);
+	if (ft_lstsize(*node) > 1)
+	{
+		end = lst_get(*node, ft_lstsize(*node) - 1);
+		tmp = lst_get(*node, ft_lstsize(*node) - 2);
+		content = end->content;
+		st_new_push(node, content);
+		ft_lstdelone(end, free);
+		tmp->next = NULL;
+		if (c == 'a')
+			write(1, "rra\n", 4);
+		if (c == 'b')
+			write(1, "rrb\n", 4);
+		return (1);
+	}
+	return (0);
+}
 
+int	st_rrotate_rrr(t_list **a, t_list **b)
+{
+	if (!st_rev_rotate_ab(a, 0))
+		return (0);
+	if (!st_rev_rotate_ab(b, 0))
+		return (0);
+	write(1, "rrr\n", 4);
+	return (1);
 }
