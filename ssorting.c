@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ssorting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/01 02:09:58 by marvin            #+#    #+#             */
-/*   Updated: 2022/02/01 02:09:58 by marvin           ###   ########.fr       */
+/*   Created: 2022/02/07 11:45:53 by midfath           #+#    #+#             */
+/*   Updated: 2022/02/07 11:45:53 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "push_swap.h"
 
 int	ft_nbrlen(int n, int base)
@@ -46,7 +45,7 @@ int	st_putitright(t_list **a, t_list **b)
 	}
 	st_smallsorting(a, b);
 	if (!st_isready(*a))
-		st_radix(a, b, ft_nbrlen(max_num, 2), 0);
+		st_radix(a, b, 0);
 	return (0);
 }
 
@@ -77,13 +76,13 @@ void	st_smallsorting(t_list **a, t_list **b)
 		st_push_ab(a, b, 'a');
 }
 
-int	st_radix(t_list **a, t_list **b, int max, int shifter)
+int	st_radix(t_list **a, t_list **b, int shifter)
 {
 	int	i;
 	int	len;
 	int	lim;
 
-	if (shifter > max || st_isready(*a))
+	if (st_isready(*a))
 	{
 		while (ft_lstsize(*b))
 			st_push_ab(a, b, 'a');
@@ -103,7 +102,7 @@ int	st_radix(t_list **a, t_list **b, int max, int shifter)
 	len = ft_lstsize(*b);
 	while (++i < len - st_checkorder(*a, *b, 'b'))
 		st_push_ab(a, b, 'a');
-	return (st_radix(a, b, max, shifter + 1));
+	return (st_radix(a, b, shifter + 1));
 }
 
 int	st_checkorder(t_list *a, t_list *b, char c)

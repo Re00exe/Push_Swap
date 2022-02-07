@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 static void	ft_error(int a)
 {
@@ -36,7 +35,7 @@ static void	ft_check(int ac, char **av)
 		j = i + 1;
 		while (j < ac)
 		{
-			if (num == ft_atoi(av[j]))
+			if (num == ft_up_atoi(av[j]))
 				ft_error(1);
 			j++;
 		}

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   sorting_fcts.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -57,7 +57,7 @@ int	st_to_lift(t_list **stack, void*content, char c)
 			if (index > (ft_lstsize(*stack) - 1) / 2)
 				st_rev_rotate_ab(stack, c);
 			else
-				st_rev_rotate_ab(stack, c);
+				st_rotate_ab(stack, c);
 		}
 	}
 	free(tmp);
