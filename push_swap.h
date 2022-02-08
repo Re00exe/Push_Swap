@@ -48,7 +48,6 @@ int		st_rotate_rr(t_list **a, t_list **b);
 /*******ssorting.c******************************/
 int		st_putitright(t_list **a, t_list **b);
 void	st_smallsorting(t_list **a, t_list **b);
-int		ft_nbrlen(int n, int base);
 int		st_radix(t_list **a, t_list **b, int shifter);
 int		st_checkorder(t_list *a, t_list *b, char c);
 
