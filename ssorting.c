@@ -15,19 +15,22 @@ int	st_putitright(t_list **a, t_list **b)
 {
 	int	max_num;
 
-	max_num = ft_lstsize(*a) - 1;
+	max_num = ft_lstsize(*a);
 	if (st_isready(*a))
 		return (0);
-	if (max_num + 1 == 2)
+	if (max_num == 2)
 		return (st_swap_ab(a, 'a'));
 	st_trans(a);
-	while (ft_lstsize(*a) > 3 && ft_lstsize(*a) < 7)
+	if (max_num < 6)
 	{
-		st_to_lift(a, lst_min(*a)->content, 'a');
-		st_push_ab(b, a, 'b');
+		while (ft_lstsize(*a) > 3 && ft_lstsize(*a) < 6)
+		{
+			st_to_lift(a, lst_min(*a)->content, 'a');
+			st_push_ab(b, a, 'b');
+		}
+		st_smallsorting(a, b);
 	}
-	st_smallsorting(a, b);
-	if (!st_isready(*a))
+	else if (max_num >= 6)
 		st_radix(a, b, 0);
 	return (0);
 }
@@ -62,8 +65,6 @@ void	st_smallsorting(t_list **a, t_list **b)
 int	st_radix(t_list **a, t_list **b, int shifter)
 {
 	int	i;
-	int	len;
-	int	lim;
 
 	if (st_isready(*a))
 	{
@@ -72,9 +73,7 @@ int	st_radix(t_list **a, t_list **b, int shifter)
 		return (0);
 	}
 	i = -1;
-	len = ft_lstsize(*a);
-	lim = st_checkorder(*a, *b, 'a');
-	while (++i < len - lim && !st_isready(*a))
+	while (++i < ft_lstsize(*a) && !st_isready(*a))
 	{
 		if (!(*(int *)(*a)->content >> shifter & 1))
 			st_push_ab(b, a, 'b');
@@ -82,37 +81,12 @@ int	st_radix(t_list **a, t_list **b, int shifter)
 			st_rotate_ab(a, 'a');
 	}
 	i = -1;
-	len = ft_lstsize(*b);
-	while (++i < len - st_checkorder(*a, *b, 'b'))
-		st_push_ab(a, b, 'a');
-	return (st_radix(a, b, shifter + 1));
-}
-
-int	st_checkorder(t_list *a, t_list *b, char c)
-{
-	int	len;
-	int	count;
-
-	count = 0;
-	len = 0;
-	while (c == 'a' && a)
+	while (++i < ft_lstsize(*b))
 	{
-		if (*(int *)a->content == len)
-			count++;
+		if (!(*(int *)(*b)->content >> ++shifter & 1))
+			st_rotate_ab(b, 'b');
 		else
-			count = 0;
-		len++;
-		a = a->next;
+			st_push_ab(a, b, 'a');
 	}
-	len = ft_lstsize(b) - 1;
-	while (c == 'b' && b)
-	{
-		if (*(int *)b->content == len)
-			count++;
-		else
-			count = 0;
-		len--;
-		b = b->next;
-	}
-	return (count);
+	return (st_radix(a, b, shifter));
 }

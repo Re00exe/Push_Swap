@@ -42,7 +42,7 @@ long	ft_up_atoi(char *str)
 
 int	st_to_lift(t_list **stack, void*content, char c)
 {
-	size_t	index;
+	ssize_t	index;
 	void	*tmp;
 
 	tmp = malloc(sizeof(int));
@@ -95,23 +95,4 @@ int	st_new_push(t_list **stack, void *new)
 		return (0);
 	ft_lstadd_front(stack, node);
 	return (1);
-}
-
-void	st_clear(t_list **stack)
-{
-	t_list	*tmp;
-
-	tmp = NULL;
-	if (*stack)
-	{
-		while (*stack)
-		{
-			tmp = *stack;
-			stack[0] = stack[0]->next;
-			free(tmp->content);
-			free(tmp);
-			tmp = NULL;
-		}
-	}
-	*stack = NULL;
 }

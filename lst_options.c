@@ -55,7 +55,7 @@ size_t	lst_find(t_list *head, void *content)
 	return (-1);
 }
 
-void	lst_put_at(t_list **stack, size_t index, void *num)
+void	lst_put_at(t_list **stack, ssize_t index, void *num)
 {
 	int		i;
 	t_list	*start;
@@ -77,9 +77,9 @@ void	lst_put_at(t_list **stack, size_t index, void *num)
 	}
 }
 
-t_list	*lst_get(t_list *head, size_t index)
+t_list	*lst_get(t_list *head, ssize_t index)
 {
-	size_t	i;
+	ssize_t	i;
 
 	i = 0;
 	while (head)

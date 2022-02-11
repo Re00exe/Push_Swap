@@ -22,7 +22,6 @@ long	ft_up_atoi(char *str);
 int		st_to_lift(t_list **stack, void*content, char c);
 void	*st_pop_out(t_list **stack);
 int		st_new_push(t_list **stack, void *new);
-void	st_clear(t_list **stack);
 /*********************************PUSH_SWAP***********************************/
 /********push_swap_utils.c****************************/
 int		st_swap_ab(t_list **head, char c);
@@ -35,8 +34,8 @@ int		st_rrotate_rrr(t_list **a, t_list **b);
 t_list	*lst_max(t_list *head);
 t_list	*lst_min(t_list *head);
 size_t	lst_find(t_list *head, void *content);
-void	lst_put_at(t_list **stack, size_t index, void *num);
-t_list	*lst_get(t_list *head, size_t index);
+void	lst_put_at(t_list **stack, ssize_t index, void *num);
+t_list	*lst_get(t_list *head, ssize_t index);
 /*********************************PUSH_SWAP***********************************/
 /*******stack_utils.c************************************************/
 int		st_isready(t_list *head);
@@ -49,6 +48,5 @@ int		st_rotate_rr(t_list **a, t_list **b);
 int		st_putitright(t_list **a, t_list **b);
 void	st_smallsorting(t_list **a, t_list **b);
 int		st_radix(t_list **a, t_list **b, int shifter);
-int		st_checkorder(t_list *a, t_list *b, char c);
 
 #endif

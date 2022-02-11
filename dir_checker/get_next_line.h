@@ -6,12 +6,13 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 16:34:03 by midfath           #+#    #+#             */
-/*   Updated: 2021/11/26 11:21:57 by midfath          ###   ########.fr       */
+/*   Updated: 2022/02/10 13:25:31 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+# define BUFFER_SIZE 1024
 
 # include <unistd.h>
 # include <stdlib.h>
