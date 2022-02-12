@@ -62,18 +62,23 @@ void	st_smallsorting(t_list **a, t_list **b)
 		st_push_ab(a, b, 'a');
 }
 
+static int	stopa(t_list **a, t_list **b)
+{
+	while (ft_lstsize(*b))
+		st_push_ab(a, b, 'a');
+	return (0);
+}
+
 int	st_radix(t_list **a, t_list **b, int shifter)
 {
 	int	i;
+	int	len;
 
 	if (st_isready(*a))
-	{
-		while (ft_lstsize(*b))
-			st_push_ab(a, b, 'a');
-		return (0);
-	}
+		return (stopa(a, b));
 	i = -1;
-	while (++i < ft_lstsize(*a) && !st_isready(*a))
+	len = ft_lstsize(*a);
+	while (++i < len && !st_isready(*a))
 	{
 		if (!(*(int *)(*a)->content >> shifter & 1))
 			st_push_ab(b, a, 'b');
@@ -81,9 +86,11 @@ int	st_radix(t_list **a, t_list **b, int shifter)
 			st_rotate_ab(a, 'a');
 	}
 	i = -1;
-	while (++i < ft_lstsize(*b))
+	shifter++;
+	len = ft_lstsize(*b);
+	while (++i < len)
 	{
-		if (!(*(int *)(*b)->content >> ++shifter & 1))
+		if (!(*(int *)(*b)->content >> shifter & 1))
 			st_rotate_ab(b, 'b');
 		else
 			st_push_ab(a, b, 'a');

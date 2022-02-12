@@ -27,15 +27,16 @@ int	ch_swap_ab(t_list **head)
 	return (0);
 }
 
-int	ch_push_ab(t_list **src, t_list **dst)
+int	ch_push_ab(t_list **a, t_list **b)
 {
 	void	*node;
 
-	if (ft_lstsize(*dst))
+	if (ft_lstsize(*b))
 	{
-		node = st_pop_out(dst);
-		st_new_push(src, node);
-		free(node);
+		node = st_pop_out(b);
+		st_new_push(a, node);
+		if (node)
+			free(node);
 		return (1);
 	}
 	return (0);

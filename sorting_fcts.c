@@ -32,12 +32,13 @@ long	ft_up_atoi(char *str)
 	while (ft_isdigit(str[i]))
 	{
 		nb = (nb * 10) + str[i] - '0';
+		if (nb > INT_MAX)
+			return (nb * sign);
 		i++;
 	}
-	if (str[i] || nb > INT_MAX)
-		return (2147483648);
-	else
-		return (nb * sign);
+	if (str[i] || i == 0 || (i > 0 && !ft_isdigit(str[i - 1])))
+		return ((long)INT_MAX + 1);
+	return (nb * sign);
 }
 
 int	st_to_lift(t_list **stack, void*content, char c)
@@ -75,14 +76,17 @@ void	*st_pop_out(t_list **stack)
 	head = *stack;
 	if (head->next)
 	{
-		*stack = head->next;
+		*stack = (*stack)->next;
 		node = head->content;
 		free(head);
 		return (node);
 	}
-	node = head->content;
-	free(head);
-	*stack = NULL;
+	else
+	{
+		node = head->content;
+		free(head);
+		*stack = NULL;
+	}
 	return (node);
 }
 

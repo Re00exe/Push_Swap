@@ -25,7 +25,7 @@ int		st_new_push(t_list **stack, void *new);
 /*********************************PUSH_SWAP***********************************/
 /********push_swap_utils.c****************************/
 int		st_swap_ab(t_list **head, char c);
-int		st_push_ab(t_list **src, t_list **dst, char c);
+int		st_push_ab(t_list **a, t_list **b, char c);
 int		st_rotate_ab(t_list **head, char c);
 int		st_rev_rotate_ab(t_list **node, char c);
 int		st_rrotate_rrr(t_list **a, t_list **b);

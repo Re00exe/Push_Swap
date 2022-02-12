@@ -6,12 +6,11 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 11:43:10 by midfath           #+#    #+#             */
-/*   Updated: 2022/02/10 19:21:15 by midfath          ###   ########.fr       */
+/*   Updated: 2022/02/11 22:38:30 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
-#include "../push_swap.h"
 
 void	ft_error(void)
 {

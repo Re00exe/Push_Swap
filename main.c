@@ -28,7 +28,7 @@ static void	ft_check(int ac, char **av)
 	while (i < ac)
 	{
 		num = ft_up_atoi(av[i]);
-		if (num == 2147483648 || num == -2147483648)
+		if (num > INT_MAX || num < INT_MIN)
 			ft_error();
 		j = i + 1;
 		while (j < ac)
@@ -64,36 +64,11 @@ int	main(int ac, char **av)
 	t_list	*a;
 	t_list	*b;
 
-	if (ac == 1)
-		return (0);
 	a = ft_get_num(ac, av);
 	b = NULL;
+	if (ac <= 2)
+		return (0);
 	st_putitright(&a, &b);
 	ft_lstclear(&a, free);
 	ft_lstclear(&b, free);
 }
-/*	printf("[%d]\n", st_isready(a));
-	//st_trans(&a);
-	printf("\n");
-	//st_swap_ab(&a ,'a');
-	//st_push_ab(&a, &b, 'b');
-	//st_rotate_ab(&a, 'a');
-
-    while (a || b)
-    {
-        if (a)
-        {
-            printf("%d", *(int *)a->content);
-            a = a->next;
-        }
-        printf("	|	");
-        if (b)
-        {
-            printf("%d", *(int *)b->content);
-            b = b->next;
-        }
-        printf("\n");
-   }
-    printf("-\t\t-\na\t\tb\n");
-}
-*/

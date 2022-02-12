@@ -32,14 +32,14 @@ int	st_swap_ab(t_list **head, char c)
 	return (0);
 }
 
-int	st_push_ab(t_list **src, t_list **dst, char c)
+int	st_push_ab(t_list **a, t_list **b, char c)
 {
 	void	*node;
 
-	if (ft_lstsize(*dst))
+	if (ft_lstsize(*b))
 	{
-		node = st_pop_out(dst);
-		st_new_push(src, node);
+		node = st_pop_out(b);
+		st_new_push(a, node);
 		free(node);
 		if (c == 'a')
 			write(1, "pa\n", 3);

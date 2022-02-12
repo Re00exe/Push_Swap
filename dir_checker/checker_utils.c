@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:18:14 by midfath           #+#    #+#             */
-/*   Updated: 2022/02/10 18:54:20 by midfath          ###   ########.fr       */
+/*   Updated: 2022/02/11 22:36:47 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ void	st_checker(t_list **a, t_list **b)
 	{
 		if (!ft_strcmp(buff, "sa\n") || !ft_strcmp(buff, "sb\n")
 			|| !ft_strcmp(buff, "ss\n"))
-			swap(*a, *b, buff);
+			swap(a, b, buff);
 		else if (!ft_strcmp(buff, "pa\n") || !ft_strcmp(buff, "pb\n"))
-			push(*a, *b, buff);
+			push(a, b, buff);
 		else if (!ft_strcmp(buff, "ra\n") || !ft_strcmp(buff, "rb\n")
 			|| !ft_strcmp(buff, "rr\n"))
-			rotate(*a, *b, buff);
+			rotate(a, b, buff);
 		else if (!ft_strcmp(buff, "rra\n") || !ft_strcmp(buff, "rrb\n")
 			|| !ft_strcmp(buff, "rrr\n"))
-			rev_rotate(*a, *b, buff);
+			rev_rotate(a, b, buff);
 		else
 			ft_error();
 		free(buff);
