@@ -36,7 +36,7 @@ long	ft_up_atoi(char *str)
 			return (nb * sign);
 		i++;
 	}
-	if (str[i] || i == 0 || (i > 0 && !ft_isdigit(str[i - 1])))
+	if (str[i] || i == 0 || (i && !ft_isdigit(str[i - 1])))
 		return ((long)INT_MAX + 1);
 	return (nb * sign);
 }
